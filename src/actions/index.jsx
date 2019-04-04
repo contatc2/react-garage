@@ -12,9 +12,9 @@ export function fetchCars(garage) {
   }
 }
 
-export function createCar(garage, author, brand) {
+export function createCar(garage, owner, brand) {
   const url = `https://wagon-garage-api.herokuapp.com/${garage}/cars`;
-  const body = { garage: garage, author: author, brand: brand};
+  const body = { garage: garage, owner: owner, brand: brand};
   const promise = fetch(url, {
     method: 'POST',
     headers: {
