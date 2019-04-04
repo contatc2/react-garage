@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import {
   createStore, combineReducers, applyMiddleware, compose
 } from 'redux';
-import { BrowserRouter as Router, Route, Redirect, Switch }
+import { BrowserRouter as Router, Route, Switch }
 from 'react-router-dom';
 import { createBrowserHistory as history } from 'history';
 import { logger } from 'redux-logger';
@@ -13,34 +13,40 @@ import reduxPromise from 'redux-promise';
 
 // internal modules
 import './index.css';
-import App from './components/app';
+import CarsIndex from './containers/cars_index';
 import * as serviceWorker from './serviceWorker';
-import MessagesReducer from './reducers/messages_reducer';
+import CarsReducer from './reducers/cars_reducer';
 
 // State and reducers
-const identityReducer = (state = null) => state;
+const garageName = prompt("What is your garage?") || `garage${Math.floor(10 + (Math.random() * 90))}`;
+
+const initialState = {
+  garage: garageName,
+  cars: []
+};
+
+initialState.cars = [
+  { id: 1, brand: 'Peugeot', model: '106', owner: 'John', plate: 'WOB-ED-42' },
+  { id: 2, brand: 'Renault', model: 'Scenic', owner: 'Paul', plate: 'AAA-12-BC' },
+  { id: 3, brand: 'Aston Martin', model: 'DB Mark III', owner: 'James', plate: '418-ED-94' },
+  { id: 4, brand: 'VW', model: 'Beetle', owner: 'George', plate: '1234-XD-75' }
+];
+
 const reducers = combineReducers({
-  messages: MessagesReducer,
-  channels: identityReducer,
-  currentUser: identityReducer,
+  garage: (state = null, action) => state,
+  cars: CarsReducer
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const middlewares = composeEnhancers(applyMiddleware(logger, reduxPromise));
 
-const initialState = {
-  messages: [],
-  channels: ['general', 'london', 'react'],
-  currentUser: prompt("What is your username?") || `anonymous${Math.floor(10 + (Math.random() * 90))}`
-};
 
 
 ReactDOM.render(
   <Provider store={createStore(reducers, initialState, middlewares)}>
     <Router history={history}>
       <Switch>
-        <Route path="/:channel" component={App} />
-        <Redirect from="/" to="/general" />
+        <Route path="/" exact component={CarsIndex} />
       </Switch>
     </Router>
   </Provider>,
