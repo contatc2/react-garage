@@ -12,7 +12,7 @@ import { logger } from 'redux-logger';
 import reduxPromise from 'redux-promise';
 
 // internal modules
-import './index.css';
+import './index.scss';
 import CarsIndex from './containers/cars_index';
 import * as serviceWorker from './serviceWorker';
 import CarsReducer from './reducers/cars_reducer';
@@ -46,7 +46,9 @@ ReactDOM.render(
   <Provider store={createStore(reducers, initialState, middlewares)}>
     <Router history={history}>
       <Switch>
-        <Route path="/" exact component={CarsIndex} />
+        <div className="container">
+          <Route path="/" exact component={CarsIndex} />
+        </div>
       </Switch>
     </Router>
   </Provider>,

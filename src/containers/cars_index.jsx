@@ -2,7 +2,7 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-
+import logo from '../logo.svg';
 import { fetchCars } from '../actions';
 
 class CarsIndex extends React.Component {
@@ -19,14 +19,18 @@ class CarsIndex extends React.Component {
     return this.props.cars.map((car) => {
         return(
           <Link to={`/cars/${car.id}`} key={car.id}>
-            <div className="car-container">
-              <img src="" alt=""/>
-              <h3>{car.brand}</h3>
-              <p>{car.owner}</p>
+            <div className="card-product">
+              <img src={logo} alt="logo"/>
+              <div className="card-product-infos">
+                <h2>{car.brand} - {car.model}</h2>
+                <p><strong>Owner:</strong>{car.owner}</p>
+              </div>
             </div>
           </Link>);
     });
   }
+
+
 
   render(){
     return(
