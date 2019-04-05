@@ -14,6 +14,7 @@ import reduxPromise from 'redux-promise';
 // internal modules
 import './index.scss';
 import CarsIndex from './containers/cars_index';
+import CarShow from './containers/car_show';
 import * as serviceWorker from './serviceWorker';
 import CarsReducer from './reducers/cars_reducer';
 
@@ -48,6 +49,7 @@ ReactDOM.render(
       <Switch>
         <div className="container">
           <Route path="/" exact component={CarsIndex} />
+          <Route path="/cars/:id" component={CarShow} />
         </div>
       </Switch>
     </Router>
