@@ -23,7 +23,7 @@ class CarsIndex extends React.Component {
               <img src={logo} alt="logo"/>
               <div className="card-product-infos">
                 <h2>{car.brand} - {car.model}</h2>
-                <p><strong>Owner:</strong>{car.owner}</p>
+                <p><strong>Owner: </strong>{car.owner}</p>
               </div>
             </div>
           </Link>);
@@ -34,8 +34,15 @@ class CarsIndex extends React.Component {
 
   render(){
     return(
-      <div>
-        {this.renderCars()}
+      <div className="cars-index">
+        <div className="garage-container">
+          <img src={logo} alt="logo"/>
+          <h2>{this.props.garage}</h2>
+          <p>The best place to repair your beloved car</p>
+        </div>
+        <div className="cars-container">
+          {this.renderCars()}
+        </div>
       </div>
       )
   }
