@@ -15,6 +15,7 @@ import reduxPromise from 'redux-promise';
 import './index.scss';
 import CarsIndex from './containers/cars_index';
 import CarShow from './containers/car_show';
+import CarNew from './containers/car_new';
 import * as serviceWorker from './serviceWorker';
 import CarsReducer from './reducers/cars_reducer';
 
@@ -50,6 +51,7 @@ ReactDOM.render(
         <div className="container">
           <Route path="/" exact component={CarsIndex} />
           <Route path="/cars/:id" component={CarShow} />
+          <Route path="/cars/new" component={CarNew} />
         </div>
       </Switch>
     </Router>
