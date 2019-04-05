@@ -47,13 +47,13 @@ const middlewares = composeEnhancers(applyMiddleware(logger, reduxPromise));
 ReactDOM.render(
   <Provider store={createStore(reducers, initialState, middlewares)}>
     <Router history={history}>
-      <Switch>
-        <div className="container">
+      <div className="container">
+        <Switch>
           <Route path="/" exact component={CarsIndex} />
           <Route path="/cars/:id" component={CarShow} />
           <Route path="/cars/new" component={CarNew} />
-        </div>
-      </Switch>
+        </Switch>
+      </div>
     </Router>
   </Provider>,
   document.getElementById('root')
