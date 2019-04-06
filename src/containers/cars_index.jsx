@@ -6,14 +6,10 @@ import logo from '../logo.svg';
 import { fetchCars } from '../actions';
 
 class CarsIndex extends React.Component {
-  constructor(props) {
-    super(props);
+
+  componentDidMount() {
     this.props.fetchCars(this.props.garage);
   }
-
-  // componentDidMount() {
-  //   this.props.fetchCars(this.props.garage);
-  // }
 
   renderCars() {
     return this.props.cars.map((car) => {
@@ -39,7 +35,7 @@ class CarsIndex extends React.Component {
           <img src={logo} alt="logo"/>
           <h2>{this.props.garage}</h2>
           <p>The best place to repair your beloved car</p>
-          <Link className="btn btn-primary btn-cta" to="/cars/new">
+          <Link className="btn btn-primary" to="/cars/new">
             Add a car
           </Link>
         </div>

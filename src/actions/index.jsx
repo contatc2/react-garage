@@ -24,9 +24,8 @@ export function fetchCar(garage, id) {
 }
 
 
-export function createCar(garage, model, owner, brand, plate) {
+export function createCar(garage, body, callback) {
   const url = `https://wagon-garage-api.herokuapp.com/${garage}/cars`;
-  const body = { model: model, owner: owner, brand: brand, plate: plate};
   const request = fetch(url, {
     method: 'POST',
     headers: {
@@ -34,7 +33,8 @@ export function createCar(garage, model, owner, brand, plate) {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(body)
-  }).then(response => response.json());
+  }).then(response => response.json())
+    .then(callback);
   return {
     type: CREATE_CAR,
     payload: request

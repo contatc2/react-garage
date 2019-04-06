@@ -2,14 +2,14 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchCar } from '../actions';
+import { fetchCars } from '../actions';
 import logo from '../logo.svg';
 
 class CarsIndex extends React.Component {
 
   componentDidMount() {
     if (!this.props.car) {
-      this.props.fetchCar(this.props.garage, this.props.match.params.id);
+      this.props.fetchCars(this.props.garage);
     }
   }
 
@@ -28,7 +28,7 @@ class CarsIndex extends React.Component {
 
   render(){
     if (!this.props.car) {
-      return <p>Loading...</p>;
+      return <p>loading...</p>;
     }
     return(
         <div className="cars-container">
@@ -43,7 +43,7 @@ class CarsIndex extends React.Component {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
-    { fetchCar },
+    { fetchCars },
     dispatch
   );
 }
@@ -52,6 +52,7 @@ function mapStateToProps(state, ownProps) {
   const idFromUrl = parseInt(ownProps.match.params.id, 10); // From URL
   return {
     garage: state.garage,
+    cars: state.cars,
     car: state.cars.find(p => p.id === idFromUrl)
   };
 }

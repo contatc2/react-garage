@@ -26,6 +26,10 @@ a:hover {
   width: 200px;
   background: white;
   padding: 10px;
+  text-align: center;
+  img {
+    margin-bottom: 16px;
+  }
 }
 
 .cars-container {
@@ -72,8 +76,8 @@ a:hover {
   &:hover {
     background-color: #2A2A2A;
   }
-  border: 1px solid;
-  color: white;
+  border: 1px solid black;
+  color: black;
   margin-bottom: 10px;
 }
 
