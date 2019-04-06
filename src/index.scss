@@ -19,7 +19,7 @@ a:hover {
 
 .cars-index {
   display: flex;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .garage-container {
@@ -39,6 +39,11 @@ a:hover {
   grid-gap: 16px;
   padding: 10px;
   background: rgb(230,230,230) ;
+}
+
+.form-container {
+  flex-grow: 1;
+  background: rgb(230,230,230);
 }
 
 .card-product {

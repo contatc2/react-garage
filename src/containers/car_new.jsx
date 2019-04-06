@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
-import { Link } from 'react-router-dom';
 import { createCar } from '../actions';
+import Garage from './garage';
 
 class CarNew extends React.Component {
   onSubmit = (values) => {
@@ -24,31 +24,35 @@ class CarNew extends React.Component {
     );
   }
 
-  render() {
-    return (
-      <div className="bg-white p-3">
+  form() {
+    return(
+      <div className="bg-white p-3 mx-5 mt-5">
         <form onSubmit={this.props.handleSubmit(this.onSubmit)} className="mb-3">
-          <Field
-            label="Owner"
-            name="owner"
-            type="text"
-            component={this.renderField}
-          />
           <Field
             label="Brand"
             name="brand"
+            placeholder="Aston Martin"
             type="text"
             component={this.renderField}
           />
           <Field
             label="Model"
             name="model"
+            placeholder="DB Mark III"
+            type="text"
+            component={this.renderField}
+          />
+          <Field
+            label="Owner"
+            name="owner"
+            placeholder="James"
             type="text"
             component={this.renderField}
           />
           <Field
             label="Plate"
             name="plate"
+            placeholder="418-ED-94"
             type="text"
             component={this.renderField}
           />
@@ -57,9 +61,17 @@ class CarNew extends React.Component {
             Add Car
           </button>
         </form>
-        <Link to='/'>
-          Back
-        </Link>
+      </div>
+    );
+  }
+
+  render() {
+    return (
+      <div className="cars-index">
+        <Garage action={"Back to list"} path={"/"} />
+        <div className="form-container">
+          {this.form()}
+        </div>
       </div>
     );
   }

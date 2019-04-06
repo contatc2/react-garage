@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import logo from '../logo.svg';
 import { fetchCars } from '../actions';
+import Garage from './garage';
 
 class CarsIndex extends React.Component {
 
@@ -31,14 +32,7 @@ class CarsIndex extends React.Component {
   render(){
     return(
       <div className="cars-index">
-        <div className="garage-container">
-          <img src={logo} alt="logo"/>
-          <h2>{this.props.garage}</h2>
-          <p>The best place to repair your beloved car</p>
-          <Link className="btn btn-primary" to="/cars/new">
-            Add a car
-          </Link>
-        </div>
+        <Garage action={"Add a Car"} path={"/cars/new"} />
         <div className="cars-container">
           {this.renderCars()}
         </div>

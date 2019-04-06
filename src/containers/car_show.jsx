@@ -1,8 +1,8 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { fetchCars } from '../actions';
+import Garage from './garage';
 import logo from '../logo.svg';
 
 class CarsIndex extends React.Component {
@@ -20,6 +20,7 @@ class CarsIndex extends React.Component {
               <div className="card-product-infos">
                 <h2>{car.brand} - {car.model}</h2>
                 <p><strong>Owner: </strong>{car.owner}</p>
+                <div className="border px-3 py-1 mt-2">{car.plate}</div>
               </div>
             </div>);
   }
@@ -31,13 +32,13 @@ class CarsIndex extends React.Component {
       return <p>loading...</p>;
     }
     return(
+      <div className="cars-index">
+        <Garage action={"Back to list"} path={"/"} />
         <div className="cars-container">
           {this.renderCar(this.props.car)}
-          <Link to='/'>
-            Back
-          </Link>
         </div>
-      )
+      </div>
+    );
   }
 }
 
