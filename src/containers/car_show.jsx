@@ -1,7 +1,7 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { fetchCars } from '../actions';
+import { fetchCars, deleteCar } from '../actions';
 import Garage from './garage';
 import logo from '../logo.svg';
 
@@ -13,6 +13,10 @@ class CarsIndex extends React.Component {
     }
   }
 
+  handleClick = () => {
+    this.props.deleteCar(this.props.car);
+  }
+
   renderCar(car) {
         return(
             <div className="card-product">
@@ -22,6 +26,7 @@ class CarsIndex extends React.Component {
                 <p><strong>Owner: </strong>{car.owner}</p>
                 <div className="border px-3 py-1 mt-2">{car.plate}</div>
               </div>
+              <div className="btn btn-danger right" onClick={this.handleClick}> Delete</div>
             </div>);
   }
 
@@ -44,7 +49,7 @@ class CarsIndex extends React.Component {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
-    { fetchCars },
+    { fetchCars, deleteCar },
     dispatch
   );
 }
