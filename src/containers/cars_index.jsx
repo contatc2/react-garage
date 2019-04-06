@@ -39,6 +39,9 @@ class CarsIndex extends React.Component {
           <img src={logo} alt="logo"/>
           <h2>{this.props.garage}</h2>
           <p>The best place to repair your beloved car</p>
+          <Link className="btn btn-primary btn-cta" to="/cars/new">
+            Add a car
+          </Link>
         </div>
         <div className="cars-container">
           {this.renderCars()}

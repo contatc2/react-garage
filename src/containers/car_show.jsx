@@ -6,13 +6,12 @@ import { fetchCar } from '../actions';
 import logo from '../logo.svg';
 
 class CarsIndex extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
-  // componentDidMount() {
-  //   this.props.fetchCars(this.props.garage);
-  // }
+  componentDidMount() {
+    if (!this.props.car) {
+      this.props.fetchCar(this.props.garage, this.props.match.params.id);
+    }
+  }
 
   renderCar(car) {
         return(
@@ -28,11 +27,14 @@ class CarsIndex extends React.Component {
 
 
   render(){
+    if (!this.props.car) {
+      return <p>Loading...</p>;
+    }
     return(
         <div className="cars-container">
           {this.renderCar(this.props.car)}
           <Link to='/'>
-          back to all cars
+            Back
           </Link>
         </div>
       )
@@ -46,10 +48,11 @@ function mapDispatchToProps(dispatch) {
   );
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state, ownProps) {
+  const idFromUrl = parseInt(ownProps.match.params.id, 10); // From URL
   return {
     garage: state.garage,
-    cars: state.cars
+    car: state.cars.find(p => p.id === idFromUrl)
   };
 }
 

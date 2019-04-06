@@ -13,8 +13,8 @@ export function fetchCars(garage) {
   }
 }
 
-export function fetchCar(garage) {
-  const url = `https://wagon-garage-api.herokuapp.com/${garage}/cars`;
+export function fetchCar(garage, id) {
+  const url = `https://wagon-garage-api.herokuapp.com/${garage}/cars/${id}`;
   const promise = fetch(url)
     .then(response => response.json());
   return {
@@ -24,10 +24,10 @@ export function fetchCar(garage) {
 }
 
 
-export function createCar(garage, owner, brand) {
+export function createCar(garage, model, owner, brand, plate) {
   const url = `https://wagon-garage-api.herokuapp.com/${garage}/cars`;
-  const body = { garage: garage, owner: owner, brand: brand};
-  const promise = fetch(url, {
+  const body = { model: model, owner: owner, brand: brand, plate: plate};
+  const request = fetch(url, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -37,6 +37,6 @@ export function createCar(garage, owner, brand) {
   }).then(response => response.json());
   return {
     type: CREATE_CAR,
-    payload: promise
+    payload: request
   }
 }

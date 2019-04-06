@@ -50,8 +50,8 @@ ReactDOM.render(
       <div className="container">
         <Switch>
           <Route path="/" exact component={CarsIndex} />
+          <Route path="/cars/new" exact component={CarNew} />
           <Route path="/cars/:id" component={CarShow} />
-          <Route path="/cars/new" component={CarNew} />
         </Switch>
       </div>
     </Router>
