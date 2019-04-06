@@ -10,6 +10,7 @@ from 'react-router-dom';
 import { createBrowserHistory as history } from 'history';
 import { logger } from 'redux-logger';
 import reduxPromise from 'redux-promise';
+import { reducer as formReducer } from 'redux-form';
 
 // internal modules
 import './index.scss';
@@ -36,7 +37,8 @@ initialState.cars = [
 
 const reducers = combineReducers({
   garage: (state = null, action) => state,
-  cars: CarsReducer
+  cars: CarsReducer,
+  form: formReducer
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
