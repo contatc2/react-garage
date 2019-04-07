@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import logo from '../logo.svg';
+import wagon from '../wagon.svg';
 
 class Garage extends React.Component {
 

@@ -4,6 +4,12 @@ import { reduxForm, Field } from 'redux-form';
 import { createCar } from '../actions';
 import Garage from './garage';
 
+const required = value => value ? undefined : 'Required';
+
+const plate = value =>
+  value && !/^[A-Z]+-[A-Z]+-[A-Z]$/.test(value) ?
+  'Invalid plate number' : undefined;
+
 class CarNew extends React.Component {
   onSubmit = (values) => {
     this.props.createCar(this.props.garage, values, (car) => {
@@ -11,15 +17,19 @@ class CarNew extends React.Component {
       return car;
     });
   }
-  renderField(field) {
+
+
+  renderField = ({field, meta: {touched, error }}) => {
     return (
       <div className="form-group">
         <label>{field.label}</label>
         <input
           className="form-control"
           type={field.type}
+          placeholder={field.placeholder}
           {...field.input}
         />
+        {touched && (error && <span>{error}</span>)}
       </div>
     );
   }
@@ -34,6 +44,7 @@ class CarNew extends React.Component {
             placeholder="Aston Martin"
             type="text"
             component={this.renderField}
+            validate={required}
           />
           <Field
             label="Model"
@@ -41,6 +52,7 @@ class CarNew extends React.Component {
             placeholder="DB Mark III"
             type="text"
             component={this.renderField}
+            validate={required}
           />
           <Field
             label="Owner"
@@ -48,6 +60,7 @@ class CarNew extends React.Component {
             placeholder="James"
             type="text"
             component={this.renderField}
+            validate={required}
           />
           <Field
             label="Plate"
@@ -55,6 +68,7 @@ class CarNew extends React.Component {
             placeholder="418-ED-94"
             type="text"
             component={this.renderField}
+            validate={plate}
           />
           <button className="btn btn-primary" type="submit"
             disabled={this.props.pristine || this.props.submitting}>
