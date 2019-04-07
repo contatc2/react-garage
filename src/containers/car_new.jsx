@@ -18,22 +18,29 @@ class CarNew extends React.Component {
     });
   }
 
-
-  renderField(field) {
+  renderField = ({
+    input,
+    label,
+    type,
+    placeholder,
+    meta: { touched, error}
+  }) => {
     return (
       <div className="form-group">
-        <label>{field.label}</label>
+        <label>{label}</label>
         <input
           className="form-control"
-          type={field.type}
-          placeholder={field.placeholder}
-          {...field.input}
+          type={type}
+          placeholder={placeholder}
+          {...input}
         />
+        {touched && (error && <span><font color="red">{error}</font></span>)}
       </div>
     );
   }
 
   form() {
+    const {invalid, pristine, submitting} = this.props;
     return(
       <div className="bg-white p-3 mx-5 mt-5">
         <form onSubmit={this.props.handleSubmit(this.onSubmit)} className="mb-3">
@@ -70,7 +77,7 @@ class CarNew extends React.Component {
             validate={[plate, required]}
           />
           <button className="btn btn-primary" type="submit"
-            disabled={this.props.pristine || this.props.submitting}>
+            disabled={invalid || pristine || submitting}>
             Add Car
           </button>
         </form>
