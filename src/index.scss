@@ -27,8 +27,19 @@ a:hover {
   background: white;
   padding: 16px;
   text-align: center;
-  img {
-    margin-bottom: 16px;
+  .garage-img {
+    width: 250px;
+    object-fit: cover;
+    margin-bottom: 24px;
+    position: relative;
+  }
+  .logo {
+    height: 50px;
+    border-radius: 50%;
+    position: absolute;
+    top: 160px;
+    left: 185px;
+    border: 2px solid white;
   }
 }
 

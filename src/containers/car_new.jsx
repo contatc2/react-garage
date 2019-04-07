@@ -7,7 +7,7 @@ import Garage from './garage';
 const required = value => value ? undefined : 'Required';
 
 const plate = value =>
-  value && !/^[A-Z]+-[A-Z]+-[A-Z]$/.test(value) ?
+  value && !/^[A-Z0-9]+-[A-Z0-9]+-[A-Z0-9]+$/.test(value) ?
   'Invalid plate number' : undefined;
 
 class CarNew extends React.Component {
@@ -19,7 +19,7 @@ class CarNew extends React.Component {
   }
 
 
-  renderField = ({field, meta: {touched, error }}) => {
+  renderField(field) {
     return (
       <div className="form-group">
         <label>{field.label}</label>
@@ -29,7 +29,6 @@ class CarNew extends React.Component {
           placeholder={field.placeholder}
           {...field.input}
         />
-        {touched && (error && <span>{error}</span>)}
       </div>
     );
   }
@@ -68,7 +67,7 @@ class CarNew extends React.Component {
             placeholder="418-ED-94"
             type="text"
             component={this.renderField}
-            validate={plate}
+            validate={[plate, required]}
           />
           <button className="btn btn-primary" type="submit"
             disabled={this.props.pristine || this.props.submitting}>

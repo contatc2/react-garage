@@ -1,7 +1,7 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { fetchCars, deleteCar } from '../actions';
+import { fetchCar, deleteCar } from '../actions';
 import Garage from './garage';
 import logo from '../logo.svg';
 
@@ -9,12 +9,14 @@ class CarsIndex extends React.Component {
 
   componentDidMount() {
     if (!this.props.car) {
-      this.props.fetchCars(this.props.garage);
+      this.props.fetchCar(this.props.match.params.id);
     }
   }
 
   handleClick = () => {
-    this.props.deleteCar(this.props.car);
+    this.props.deleteCar(this.props.car.id, () => {
+      this.props.history.push("");
+    });
   }
 
   renderCar(car) {
@@ -26,7 +28,10 @@ class CarsIndex extends React.Component {
                 <p><strong>Owner: </strong>{car.owner}</p>
                 <div className="border px-3 py-1 mt-2">{car.plate}</div>
               </div>
-              <div className="btn btn-danger right" onClick={this.handleClick}> Delete</div>
+              <button className="btn btn-danger right" onClick={this.handleClick}>
+              <i className="fas fa-trash-alt mr-2"></i>
+                Delete
+              </button>
             </div>);
   }
 
@@ -49,7 +54,7 @@ class CarsIndex extends React.Component {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
-    { fetchCars, deleteCar },
+    { fetchCar, deleteCar },
     dispatch
   );
 }
@@ -57,7 +62,6 @@ function mapDispatchToProps(dispatch) {
 function mapStateToProps(state, ownProps) {
   const idFromUrl = parseInt(ownProps.match.params.id, 10); // From URL
   return {
-    garage: state.garage,
     cars: state.cars,
     car: state.cars.find(p => p.id === idFromUrl)
   };
